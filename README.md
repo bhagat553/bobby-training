@@ -3,7 +3,7 @@ testing repo
 def print_board(board):
     for row in board:
         print(" | ".join(row))
-        print("-" * 9)
+        print("-" * 4)
 
 def check_winner(board, player):
     # Check rows and columns
