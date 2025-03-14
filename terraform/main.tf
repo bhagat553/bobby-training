@@ -1,24 +1,17 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.16"
-
-    }
-  }
-   required_version = ">= 1.2.0"
-}
-
-
-provider "aws" {
-  region  = "us-east-1"
-}
-
 resource "aws_instance" "example_server" {
-  ami           = "ami-003d574bab317de3c"
-  instance_type = "t2.micro"
+  ami           = var.ec2_ami
+  instance_type = var.instance_type
 
   tags = {
-    Name = "bobby-rhel"
+    Name = "bobby-rhel-v2"
+    Environment = var.environment
+  }
+}
+
+resource "aws_s3_bucket" "copyimages" {
+  bucket = var.bucket_name
+  tags = {
+    Name          = var.bucket_name
+    Environment = var.environment
   }
 }
